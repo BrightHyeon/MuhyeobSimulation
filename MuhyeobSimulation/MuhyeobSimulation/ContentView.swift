@@ -8,9 +8,27 @@
 import SwiftUI
 
 struct ContentView: View {
+    @State private var content: String = "Hello"
+    
     var body: some View {
-        Text("Hello, world!")
-            .padding()
+        ZStack(alignment: .leading) {
+            Color.orange
+                .ignoresSafeArea()
+            VStack(alignment: .leading) {
+                Text("무협 시뮬레이션")
+                    .font(.largeTitle)
+                    .fontWeight(.black)
+                    .padding()
+                Spacer().frame(height: 50)
+                VStack {
+                    StoryView(title: "Hello")
+                    Spacer()
+                }
+                .padding(10)
+                .background(.red)
+            }
+            .foregroundColor(.white)
+        }
     }
 }
 
