@@ -8,13 +8,13 @@
 import SwiftUI
 
 struct StoryView: View {
-    var title: String
+    @ObservedObject var vm: StoryViewModel
     
     var body: some View {
         VStack {
-            Text(title)
+//            Text(vm.currentStory.content)
             Button {
-                
+//                vm.changeCurrentStory()
             } label: {
                 Text("바꿔")
             }
@@ -24,6 +24,6 @@ struct StoryView: View {
 
 struct AView_Previews: PreviewProvider {
     static var previews: some View {
-        StoryView(title: "ji")
+        StoryView(vm: StoryViewModel())
     }
 }

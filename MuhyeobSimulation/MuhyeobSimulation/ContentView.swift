@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct ContentView: View {
-    @State private var content: String = "Hello"
+    @StateObject var vm = StoryViewModel()
     
     var body: some View {
         ZStack(alignment: .leading) {
@@ -21,7 +21,7 @@ struct ContentView: View {
                     .padding()
                 Spacer().frame(height: 50)
                 VStack {
-                    StoryView(title: "Hello")
+                    StoryView(vm: vm)
                     Spacer()
                 }
                 .padding(10)
