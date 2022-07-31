@@ -11,17 +11,18 @@ import SwiftUI
 // content: 스토리 내용
 // reward: Optinal. 해당 스토리에 갖는 보상
 // options: 각 선택지
-struct Story: Codable {
+// Equatable: .onChange를 쓰려면 Story모델이 비교가능한 것이어야 한다.
+struct Story: Equatable, Codable {
     let id: UUID
     let content: String
-    let reward: [Reward]?
+    let rewards: [Reward]?
     let options: [Selection]
 }
 
 // title: 선택지의 제목
 // selectCase: 선택지 성격
 // nextId: Optinal. 이어지는 스토리의 식별자
-struct Selection: Codable {
+struct Selection: Hashable, Codable {
     let title: String
     let selectCase: SelectCase
     let nextId: UUID?
@@ -32,7 +33,7 @@ struct Selection: Codable {
 // normal: 연관값이 필요없는 보통의 케이스
 // fight: 곧 싸우게 될 적의 power를 연관값으로 갖는 케이스
 // threaten: 마주한 적의 담력값을 연관값으로 갖는 케이스
-enum SelectCase: Equatable, Codable {
+enum SelectCase: Hashable, Codable {
     case normal
     case fight(enemyPower: Double)
     case threaten(enemyCourage: Double)
@@ -59,6 +60,8 @@ enum Reward: String, Codable {
     case plaque
     // 무공비급, 심법
     // ...
+    case healthUp
+    case healthDown
 }
 
 

@@ -11,21 +11,38 @@ struct ContentView: View {
     @StateObject var vm = StoryViewModel()
     
     var body: some View {
-        ZStack(alignment: .leading) {
-            Color.orange
+        ZStack {
+            Color.black
                 .ignoresSafeArea()
             VStack(alignment: .leading) {
                 Text("무협 시뮬레이션")
                     .font(.largeTitle)
                     .fontWeight(.black)
+                    .foregroundColor(.white)
                     .padding()
-                Spacer().frame(height: 50)
-                VStack {
-                    StoryView(vm: vm)
-                    Spacer()
+                HStack {
+                    Text("체력:")
+                    Text("\(vm.health)")
+                    Text("파워:")
+                    Text("\(Int(vm.power))")
                 }
-                .padding(10)
-                .background(.red)
+                HStack {
+                    Text("돈:")
+                    Text("\(vm.money)")
+                    Text("명성:")
+                    Text("\(vm.popularity)")
+                }
+                HStack {
+                    Text("소지품:")
+                    Text(vm.items)
+                }
+                Spacer().frame(height: 20)
+                ScrollView {
+                    StoryView(vm: vm)
+                        .frame(width: UIScreen.main.bounds.width)
+                }
+                .background(.white)
+                .foregroundColor(.black)
             }
             .foregroundColor(.white)
         }

@@ -16,11 +16,14 @@ class StoryViewModel: ObservableObject {
     
     @Published var power: Double = 10 // 파워
     @Published var popularity: Int = 0 // 명성
+    @Published var items: String = ""
+    
+    @Published var money: Int = 100
     
     @Published var currentStory = Story(
         id: UUID(),
         content: " 내 이름은 울랄라. \n\n 평범한 가문에서 태어났지만 누구보다 열심히 무공을 수련했고 이제 가문이란 울타리 밖으로 나갈 때가 되었다. \n\n \"울랄라. 내 아들.\n 이제 내가 가르칠 수 있는 것은 없다. 이제는 밖으로 나가 세상을 돌아볼 때가 되었다.\n 바깥에서 무사수행을 통해 협의가 무엇인지 보여주거라. 너라면 잘할 수 있을 거다.\"\n\n 아버지는 항상 투정부리지않고 열심히 수련을 한 내가 대견하다는 듯이 바라보셨다. \n\n \"네 아버지. 세상을 돌아다니며 많은 것을 느끼고 오겠습니다.\"\n\n 말을 마친 뒤, 나는 대문 밖으로 나섰다. \n\n '나는 대협이 될 것이다...'",
-        reward: nil,
+        rewards: nil,
         options: [
             Selection(title: "무사수행 시작하기", selectCase: .normal, nextId: nil, ifFail: nil)
         ])
@@ -39,7 +42,13 @@ class StoryViewModel: ObservableObject {
         switch selection.selectCase {
         case .normal:
             print("Normal Selection")
-            self.currentStory = normalBases.randomElement()!
+            if let nextId = selection.nextId {
+                self.currentStory = stories.first(where: { story in
+                    story.id == nextId
+                })!
+            } else {
+                self.currentStory = normalBases.randomElement()!
+            }
         case .fight(enemyPower: let enemyPower):
             print("Fight Selection")
             if isWin(enemyPower: enemyPower) {
@@ -65,6 +74,35 @@ class StoryViewModel: ObservableObject {
             return true // win
         } else {
             return false // lose
+        }
+    }
+    
+    func checkReward(_ rewards: [Reward]?) {
+        guard let rewards = rewards else { return }
+        for reward in rewards {
+            switch reward {
+            case .powerUp:
+                self.power += Double.random(in: 10...30)
+            case .powerUpUp:
+                self.power += Double.random(in: 100...300)
+            case .popularUp:
+                self.popularity += 1
+            case .popularDown:
+                self.popularity -= 1
+                print(self.popularity)
+            case .lowMoney:
+                self.money += 10
+            case .midMoney:
+                self.money += 100
+            case .highMoney:
+                self.money += 300
+            case .healthDown:
+                self.health -= 30
+            case .plaque:
+                self.items += "plaque"
+            default:
+                break
+            }
         }
     }
 }
