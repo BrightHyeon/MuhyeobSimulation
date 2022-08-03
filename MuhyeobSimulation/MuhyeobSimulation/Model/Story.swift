@@ -64,46 +64,13 @@ enum Reward: String, Codable {
     case healthDown
 }
 
-
-// TODO: 추후 시간이 남는다면 or 업데이트 때 추가할만한 내용
-
-/*
- 1. 음식점과 대장간
- 
- enum Food: String, Codable {
-     case rice
-     case noodle
- }
-
- enum Weapon: String, Codable {
-     case normalLongSord
-     case legendarySord
- }
- 
- 
- 2. 당장은 필요없을듯하여 뺌.
- 
- enum Rarity: String, Codable {
-     case normal
-     case rare
-     case legend
-     case hidden
-     case market
- }
- 
- 
- 3. SelectCase 핸들링
- 
- func a(_ selection: SelectCase) {
-     switch selection {
-     case .normal:
-         print() //story에 nextId 넘김.
-     case .fight(let enemyPower):
-         if enemyPower > 10 {
-             // 이기면 nextId, 지면 failId
-         }
-     case .threaten(let enemyCourage):
-         print() // 성공 시
-     }
- }
- */
+enum UserClass: String {
+    case third
+    case second
+    case first
+    case climax
+    case superClimax
+    case hwagyeong
+    case hyeongyeong
+    case god
+}

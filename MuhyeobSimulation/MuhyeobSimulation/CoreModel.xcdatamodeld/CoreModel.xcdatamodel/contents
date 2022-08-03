@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="20086" systemVersion="21F79" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+    <entity name="Life" representedClassName="Life" syncable="YES" codeGenerationType="class">
+        <attribute name="userClass" optional="YES" attributeType="String"/>
+        <attribute name="userExternal" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="userHealth" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="userInternal" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="userPower" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="userUnderstanding" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+        <relationship name="collectedTitles" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Title" inverseName="life" inverseEntity="Title"/>
+    </entity>
+    <entity name="Title" representedClassName="Title" syncable="YES" codeGenerationType="class">
+        <attribute name="title" optional="YES" attributeType="String"/>
+        <relationship name="life" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Life" inverseName="collectedTitles" inverseEntity="Life"/>
+    </entity>
+    <elements>
+        <element name="Life" positionX="-63" positionY="-18" width="128" height="134"/>
+        <element name="Title" positionX="-54" positionY="45" width="128" height="59"/>
+    </elements>
+</model>

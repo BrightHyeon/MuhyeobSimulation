@@ -12,7 +12,10 @@ struct StoryView: View {
     
     var body: some View {
         VStack {
-            Text(vm.currentStory.content)
+            Text(vm.currentStory.content.replacingOccurrences(
+                of: "울랄라",
+                with: vm.userName)
+            )
                 .padding()
             
             Spacer().frame(height: 70)

@@ -1,0 +1,44 @@
+[
+    {
+        "id": "",
+        "content": "",
+        "rewards": [
+            
+        ],
+        "options": [
+            {
+                "title": "",
+                "selectCase": { "normal": {} },
+                "nextId": ""
+            },
+            {
+                "title": "",
+                "selectCase": { "fight": { "enemyPower": 0 } },
+                "nextId": "",
+                "ifFail": ""
+            },
+            {
+                "title": "",
+                "selectCase": { "threaten": { "enemyCourage": 0 } },
+                "nextId": "",
+                "ifFail": ""
+            }
+        ]
+    }
+]
+
+// reward 관련
+ "powerUp",
+ "powerUpUp",
+ "popularUp",
+ "popularDown",
+ "lowMoney",
+ "midMoney",
+ "highMoney",
+ "normalWeapon",
+ "rareWeapon",
+ "epicWeapon",
+ "legendweapon",
+ "plaque",
+ "healthUp",
+ "healthDown"

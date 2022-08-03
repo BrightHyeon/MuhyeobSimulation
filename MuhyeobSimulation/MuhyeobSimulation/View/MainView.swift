@@ -7,8 +7,8 @@
 
 import SwiftUI
 
-struct ContentView: View {
-    @StateObject var vm = StoryViewModel()
+struct MainView: View {
+    @ObservedObject var vm: StoryViewModel
     
     var body: some View {
         ZStack {
@@ -20,22 +20,24 @@ struct ContentView: View {
                     .fontWeight(.black)
                     .foregroundColor(.white)
                     .padding()
-                HStack {
-                    Text("체력:")
-                    Text("\(vm.health)")
-                    Text("파워:")
-                    Text("\(Int(vm.power))")
-                }
-                HStack {
-                    Text("돈:")
-                    Text("\(vm.money)")
-                    Text("명성:")
-                    Text("\(vm.popularity)")
-                }
-                HStack {
-                    Text("소지품:")
-                    Text(vm.items)
-                }
+                VStack(alignment: .leading) {
+                    HStack {
+                        Text("체력:")
+                        Text("\(vm.health)")
+                        Text("파워:")
+                        Text("\(Int(vm.power))")
+                    }
+                    HStack {
+                        Text("돈:")
+                        Text("\(vm.money)")
+                        Text("명성:")
+                        Text("\(vm.popularity)")
+                    }
+                    HStack {
+                        Text("소지품:")
+                        Text(vm.items)
+                    }
+                }.padding()
                 Spacer().frame(height: 20)
                 ScrollView {
                     StoryView(vm: vm)
@@ -51,6 +53,6 @@ struct ContentView: View {
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        ContentView()
+        MainView(vm: StoryViewModel())
     }
 }

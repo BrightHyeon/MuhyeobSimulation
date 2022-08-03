@@ -10,6 +10,9 @@ import SwiftUI
 class StoryViewModel: ObservableObject {
     
     // MARK: Published Properties
+    @Published var currentLife: Life?
+    
+    @Published var userName: String = ""
     
     @Published var health: Int = 100
     @Published var poss: Int = 100
@@ -28,14 +31,14 @@ class StoryViewModel: ObservableObject {
             Selection(title: "무사수행 시작하기", selectCase: .normal, nextId: nil, ifFail: nil)
         ])
     
-    var normalBases: [Story] = []
+    var epicBases: [Story] = []
     var stories: [Story] = []
     
     init() {
         stories = loadJson("stories.json")
-        normalBases = loadJson("normalBases.json")
+        epicBases = loadJson("epicBases.json")
         print("Stories: \(stories)")
-        print("normalBases: \(normalBases)")
+        print("normalBases: \(epicBases)")
     }
     
     func checkSelection(_ selection: Selection) {
@@ -47,7 +50,7 @@ class StoryViewModel: ObservableObject {
                     story.id == nextId
                 })!
             } else {
-                self.currentStory = normalBases.randomElement()!
+                self.currentStory = epicBases.randomElement()!
             }
         case .fight(enemyPower: let enemyPower):
             print("Fight Selection")
