@@ -9,6 +9,8 @@ import SwiftUI
 
 class StoryViewModel: ObservableObject {
     
+    let manager = PersistenceController.shared
+    
     // MARK: Published Properties
     @Published var currentLife: Life?
     

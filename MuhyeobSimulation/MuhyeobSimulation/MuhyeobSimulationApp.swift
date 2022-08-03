@@ -9,9 +9,16 @@ import SwiftUI
 
 @main
 struct MuhyeobSimulationApp: App {
+    
+    let persistenceController = PersistenceController.shared
+    
+    let storyViewModel = StoryViewModel()
+    
     var body: some Scene {
         WindowGroup {
             NameView()
+                .environmentObject(storyViewModel)
+                .environment(\.managedObjectContext, persistenceController.container.viewContext)
         }
     }
 }

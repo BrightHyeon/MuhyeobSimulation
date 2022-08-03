@@ -5,6 +5,7 @@
         <attribute name="userExternal" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
         <attribute name="userHealth" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
         <attribute name="userInternal" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="userName" optional="YES" attributeType="String"/>
         <attribute name="userPower" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
         <attribute name="userUnderstanding" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
         <relationship name="collectedTitles" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Title" inverseName="life" inverseEntity="Title"/>
@@ -14,7 +15,7 @@
         <relationship name="life" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Life" inverseName="collectedTitles" inverseEntity="Life"/>
     </entity>
     <elements>
-        <element name="Life" positionX="-63" positionY="-18" width="128" height="134"/>
+        <element name="Life" positionX="-63" positionY="-18" width="128" height="149"/>
         <element name="Title" positionX="-54" positionY="45" width="128" height="59"/>
     </elements>
 </model>
