@@ -18,7 +18,7 @@ class PersistenceController { //class vs struct -> no error both of them.
     }
 
     init(inMemory: Bool = false) {
-        container = NSPersistentContainer(name: "Mc2_Modifier")
+        container = NSPersistentContainer(name: "CoreModel")
         if inMemory { // ?
             container.persistentStoreDescriptions.first!.url = URL(fileURLWithPath: "/dev/null")
         }

@@ -9,21 +9,9 @@ import SwiftUI
 
 class StoryViewModel: ObservableObject {
     
-    let manager = PersistenceController.shared
-    
     // MARK: Published Properties
-    @Published var currentLife: Life?
     
-    @Published var userName: String = ""
-    
-    @Published var health: Int = 100
-    @Published var poss: Int = 100
-    
-    @Published var power: Double = 10 // 파워
-    @Published var popularity: Int = 0 // 명성
-    @Published var items: String = ""
-    
-    @Published var money: Int = 100
+    @Published var user: User = User()
     
     @Published var currentStory = Story(
         id: UUID(),
@@ -71,7 +59,8 @@ class StoryViewModel: ObservableObject {
     }
     
     private func isWin(enemyPower: Double) -> Bool {
-        let winPercentage = self.power / (self.power + enemyPower) * 100
+        let winPercentage = user.userPower / (user.userPower + enemyPower) * 100
+//        let winPercentage = self.power / (self.power + enemyPower) * 100
         print("WinPercentage: \(winPercentage)")
         let randomNum: Double = Double.random(in: 0...100)
         print("RandomNum: \(randomNum)")
@@ -87,24 +76,23 @@ class StoryViewModel: ObservableObject {
         for reward in rewards {
             switch reward {
             case .powerUp:
-                self.power += Double.random(in: 10...30)
+                self.user.userPower += Double.random(in: 10...30)
             case .powerUpUp:
-                self.power += Double.random(in: 100...300)
+                self.user.userPower += Double.random(in: 100...300)
             case .popularUp:
-                self.popularity += 1
+                self.user.userPopularity += 1
             case .popularDown:
-                self.popularity -= 1
-                print(self.popularity)
+                self.user.userPopularity -= 1
             case .lowMoney:
-                self.money += 10
+                self.user.userMoney += 10
             case .midMoney:
-                self.money += 100
+                self.user.userMoney += 100
             case .highMoney:
-                self.money += 300
+                self.user.userMoney += 300
             case .healthDown:
-                self.health -= 30
+                self.user.userHealth -= 30
             case .plaque:
-                self.items += "plaque"
+                self.user.collectedItems += ["plaque"]
             default:
                 break
             }

@@ -23,19 +23,21 @@ struct MainView: View {
                 VStack(alignment: .leading) {
                     HStack {
                         Text("체력:")
-                        Text("\(vm.health)")
+                        Text("\(vm.user.userHealth)")
                         Text("파워:")
-                        Text("\(Int(vm.power))")
+                        Text("\(Int(vm.user.userPower))")
                     }
                     HStack {
                         Text("돈:")
-                        Text("\(vm.money)")
+                        Text("\(vm.user.userMoney)")
                         Text("명성:")
-                        Text("\(vm.popularity)")
+                        Text("\(vm.user.userPopularity)")
                     }
                     HStack {
                         Text("소지품:")
-                        Text(vm.items)
+                        ForEach(vm.user.collectedItems, id: \.self) { item in
+                            Text(item)
+                        }
                     }
                 }.padding()
                 Spacer().frame(height: 20)

@@ -63,14 +63,3 @@ enum Reward: String, Codable {
     case healthUp
     case healthDown
 }
-
-enum UserClass: String {
-    case third
-    case second
-    case first
-    case climax
-    case superClimax
-    case hwagyeong
-    case hyeongyeong
-    case god
-}

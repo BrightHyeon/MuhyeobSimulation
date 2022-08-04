@@ -28,7 +28,7 @@ struct NameView: View {
                     Spacer().frame(height: 50)
 
                     Button {
-                        vm.userName = text
+                        vm.user.userName = text
                         isPush.toggle()
                     } label: {
                         HStack {

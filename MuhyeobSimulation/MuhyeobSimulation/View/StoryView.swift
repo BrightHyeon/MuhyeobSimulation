@@ -14,7 +14,7 @@ struct StoryView: View {
         VStack {
             Text(vm.currentStory.content.replacingOccurrences(
                 of: "울랄라",
-                with: vm.userName)
+                with: vm.user.userName)
             )
                 .padding()
             
