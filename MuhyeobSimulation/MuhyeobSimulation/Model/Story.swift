@@ -35,7 +35,7 @@ struct Selection: Hashable, Codable {
 // threaten: 마주한 적의 담력값을 연관값으로 갖는 케이스
 enum SelectCase: Hashable, Codable {
     case normal
-    case fight(enemyPower: Double)
+    case fight(enemy: Enemy)
     case threaten(enemyCourage: Double)
 }
 
@@ -60,6 +60,4 @@ enum Reward: String, Codable {
     case plaque
     // 무공비급, 심법
     // ...
-    case healthUp
-    case healthDown
 }

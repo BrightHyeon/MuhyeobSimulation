@@ -11,7 +11,14 @@ class StoryViewModel: ObservableObject {
     
     // MARK: Published Properties
     
-    @Published var user: User = User()
+    @Published var user: User = User() {
+        didSet {
+            // 조건 제대로 안걸면 무한루프...
+            if oldValue.userPower != user.userPower {
+                checkClass()
+            }
+        }
+    }
     
     @Published var currentStory = Story(
         id: UUID(),
@@ -24,12 +31,14 @@ class StoryViewModel: ObservableObject {
     var epicBases: [Story] = []
     var stories: [Story] = []
     
+    
+    
     init() {
         stories = loadJson("stories.json")
         epicBases = loadJson("epicBases.json")
-        print("Stories: \(stories)")
-        print("normalBases: \(epicBases)")
     }
+    
+    
     
     func checkSelection(_ selection: Selection) {
         switch selection.selectCase {
@@ -42,13 +51,14 @@ class StoryViewModel: ObservableObject {
             } else {
                 self.currentStory = epicBases.randomElement()!
             }
-        case .fight(enemyPower: let enemyPower):
+        case .fight(enemy: let enemy):
             print("Fight Selection")
-            if isWin(enemyPower: enemyPower) {
+            if isWin(enemyPower: enemy.power) {
                 self.currentStory = stories.first(where: { story in
                     story.id == selection.nextId
                 })!
             } else {
+                damageTaken(enemy: enemy)
                 self.currentStory = stories.first(where: { story in
                     story.id == selection.ifFail
                 })!
@@ -58,9 +68,11 @@ class StoryViewModel: ObservableObject {
         }
     }
     
+    
+    
     private func isWin(enemyPower: Double) -> Bool {
         let winPercentage = user.userPower / (user.userPower + enemyPower) * 100
-//        let winPercentage = self.power / (self.power + enemyPower) * 100
+        //        let winPercentage = self.power / (self.power + enemyPower) * 100
         print("WinPercentage: \(winPercentage)")
         let randomNum: Double = Double.random(in: 0...100)
         print("RandomNum: \(randomNum)")
@@ -70,6 +82,8 @@ class StoryViewModel: ObservableObject {
             return false // lose
         }
     }
+    
+    
     
     func checkReward(_ rewards: [Reward]?) {
         guard let rewards = rewards else { return }
@@ -89,8 +103,6 @@ class StoryViewModel: ObservableObject {
                 self.user.userMoney += 100
             case .highMoney:
                 self.user.userMoney += 300
-            case .healthDown:
-                self.user.userHealth -= 30
             case .plaque:
                 self.user.collectedItems += ["plaque"]
             default:
@@ -98,7 +110,50 @@ class StoryViewModel: ObservableObject {
             }
         }
     }
+    
+    
+    
+    private func checkClass() {
+        switch user.userPower {
+        case 0..<200.0:
+            user.userClass = .third // test 결과 이 행위가 문제였다.
+            print("와다다다")
+        case 200..<400.0:
+            user.userClass = .second
+        case 400..<800:
+            user.userClass = .first
+        case 800..<1600:
+            user.userClass = .climax
+        case 1600..<3200:
+            user.userClass = .superClimax
+        case 3200..<6400:
+            user.userClass = .hwagyeong
+        case 6400..<12800:
+            user.userClass = .hyeongyeong
+        case 12800...:
+            user.userClass = .god
+        default:
+            user.userClass = .unknown
+        }
+    }
+    
+    
+    
+    private func damageTaken(enemy: Enemy) {
+        let powerRatio = (user.userPower + enemy.power) / user.userPower
+        let damagedHealth = user.userHealth - powerRatio*10
+        switch enemy.type {
+        case .evil:
+            user.userHealth -= powerRatio*10
+        case .middle:
+            user.userHealth = min(max(damagedHealth, 20), user.userHealth)
+        case .good:
+            user.userHealth = min(max(damagedHealth, 50), user.userHealth)
+        }
+    }
 }
+
+
 
 func loadJson<T: Codable>(_ filename: String) -> T {
     

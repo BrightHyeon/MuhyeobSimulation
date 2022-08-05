@@ -13,7 +13,11 @@
         <attribute name="userPower" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
         <attribute name="userUnderstanding" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
     </entity>
+    <entity name="Title" representedClassName="Title" syncable="YES" codeGenerationType="class">
+        <attribute name="titleName" optional="YES" attributeType="String"/>
+    </entity>
     <elements>
         <element name="Life" positionX="-63" positionY="-18" width="128" height="194"/>
+        <element name="Title" positionX="-63" positionY="63" width="128" height="44"/>
     </elements>
 </model>

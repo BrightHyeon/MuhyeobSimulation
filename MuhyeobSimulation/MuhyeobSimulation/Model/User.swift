@@ -22,13 +22,14 @@ struct User {
 }
 
 // 경지
-enum UserClass: String {
-    case third
-    case second
-    case first
-    case climax
-    case superClimax
-    case hwagyeong
-    case hyeongyeong
-    case god
+enum UserClass: String, CaseIterable {
+    case third // 삼류
+    case second // 이류
+    case first // 일류
+    case climax // 절정
+    case superClimax // 초절정
+    case hwagyeong // 화경
+    case hyeongyeong // 현경
+    case god // 입신경
+    case unknown
 }

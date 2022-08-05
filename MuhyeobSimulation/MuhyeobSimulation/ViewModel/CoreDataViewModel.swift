@@ -31,4 +31,10 @@ class CoreDataViewModel: ObservableObject {
         manager.viewContext.delete(life)
         manager.saveContext()
     }
+    
+    func addTitle(titleName: String) {
+        let title = Title(context: manager.viewContext)
+        title.titleName = titleName
+        manager.saveContext()
+    }
 }
